@@ -58,7 +58,7 @@ def html_full():
     with lcd('{ipython_dir}'.format(**env)):
         local('ls -la')
         for file in ipynb_files:
-            print '{}'.format(file)
+            print('{}'.format(file))
             local('ipython nbconvert --to html --template full {}'.format(file))
         
     with lcd(''):
@@ -74,7 +74,7 @@ def html():
     local('ls -la')
     local('sphinx-build -b html . _build/html')
     
-    print "Build finished; see _build/html/index.html"
+    print("Build finished; see _build/html/index.html")
     
 def open():
     """Open the HTML documentation in a cross-platform way."""

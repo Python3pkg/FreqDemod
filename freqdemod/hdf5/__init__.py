@@ -79,7 +79,7 @@ parameters to a group called ``workup``.
         
 """
 
-from __future__ import division, print_function, absolute_import
+
 
 def update_attrs(h5_attrs, attrs):
     """Update the attributes in ``h5_attrs``, an ``h5py`` group or dataset,
@@ -88,7 +88,7 @@ def update_attrs(h5_attrs, attrs):
     This will overwrite existing attributes.
     """
     
-    for key, val in attrs.items():
+    for key, val in list(attrs.items()):
         h5_attrs[key] = val
 
 def attr_dict_options(setting):
@@ -100,16 +100,16 @@ def attr_dict_options(setting):
     very_permissive
         Only require name, unit; other attributes can be inferred / ignored."""
     attr_dict_settings = {
-     'permissive' :   {u'name', u'unit'},
-     'label' :        {u'name', u'unit', u'label'},
-     'latex' :        {u'name', u'unit', u'label', u'label_latex'},
-     'freqdemod_y' :  {u'name', u'unit', u'label', u'label_latex', u'abscissa'},
-     'pedantic_y' :   {u'name', u'unit', u'label', u'label_latex', u'abscissa', u'help', u'n_avg'},
-     'permissive_x' : {u'name', u'unit', u'step'},
-     'label_x'      : {u'name', u'unit', u'step', u'label'},
-     'latex_x'      : {u'name', u'unit', u'step', u'label', u'label_latex'},
-     'freqdemod_x'  : {u'name', u'unit', u'step', u'label', u'label_latex', u'initial'},
-     'pedantic_x'   : {u'name', u'unit', u'step', u'label', u'label_latex', u'initial', u'help'},}
+     'permissive' :   {'name', 'unit'},
+     'label' :        {'name', 'unit', 'label'},
+     'latex' :        {'name', 'unit', 'label', 'label_latex'},
+     'freqdemod_y' :  {'name', 'unit', 'label', 'label_latex', 'abscissa'},
+     'pedantic_y' :   {'name', 'unit', 'label', 'label_latex', 'abscissa', 'help', 'n_avg'},
+     'permissive_x' : {'name', 'unit', 'step'},
+     'label_x'      : {'name', 'unit', 'step', 'label'},
+     'latex_x'      : {'name', 'unit', 'step', 'label', 'label_latex'},
+     'freqdemod_x'  : {'name', 'unit', 'step', 'label', 'label_latex', 'initial'},
+     'pedantic_x'   : {'name', 'unit', 'step', 'label', 'label_latex', 'initial', 'help'},}
     return attr_dict_settings[setting]
 
 
@@ -125,7 +125,7 @@ def infer_labels(attrs):
     name = attrs['name']
     unit = attrs['unit']
 
-    attr_dict = dict(attrs.items())
+    attr_dict = dict(list(attrs.items()))
 
 
     label_dict = {'label': '{} [{}]'.format(name, unit),
@@ -136,7 +136,7 @@ def infer_labels(attrs):
 
 
 def add_attrs_if_missing(h5_attrs, **kwargs):
-    h5_attrs_dict = dict(h5_attrs.items())
+    h5_attrs_dict = dict(list(h5_attrs.items()))
     kwargs.update(h5_attrs_dict)
     update_attrs(h5_attrs, kwargs)
 

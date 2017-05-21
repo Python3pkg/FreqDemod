@@ -49,7 +49,7 @@ We demodulate the signal in the following steps:
 
 """
 
-from __future__ import division, print_function, absolute_import
+
 import h5py
 import numpy as np 
 import scipy as sp 
@@ -264,7 +264,7 @@ class Signal(object):
         """
         self.f.attrs['report'] = "\n".join(self.report)
 
-        save_options = {'all': self.f.keys(),
+        save_options = {'all': list(self.f.keys()),
                         'input': ['x', 'y'],
                         'input_no_t': ['y'],
                         'time_workup': ['x', 'y', 'workup/time'],

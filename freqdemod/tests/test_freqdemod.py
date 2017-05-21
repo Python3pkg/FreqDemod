@@ -77,13 +77,13 @@ class TestClose(unittest.TestCase):
                                 
         report = []
         
-        for key, val in self.snew.f.attrs.items():
+        for key, val in list(self.snew.f.attrs.items()):
             report.append("{0}: {1}".format(key, val))
         
         for item in self.snew.f:
             
             report.append("{}".format(self.snew.f[item].name))
-            for key, val in self.snew.f[item].attrs.items():
+            for key, val in list(self.snew.f[item].attrs.items()):
                 report.append("    {0}: {1}".format(key, val))
         
         report_string = "\n".join(report)
